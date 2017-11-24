@@ -1,4 +1,6 @@
 import ConfigParser
+import BL_Exit
+
 
 class BL_Exit_Theme():
         def __init__(self, theme, settings, blexit):
@@ -15,7 +17,8 @@ class BL_Exit_Theme():
                 try:
                     config_value = cp.get(self.theme, key)
                 except ConfigParser.NoOptionError as e:
-                    BL_Exit.on_debug("theme config option {} is not set for theme {}".format(key, self.theme))
+                    msg = "theme config option {} is not set for theme {}"
+                    BL_Exit.on_debug(msg.format(key, self.theme))
                     config_value = None
                     pass
                 if config_value is not None:
@@ -23,13 +26,15 @@ class BL_Exit_Theme():
                         try:
                             config_value = int(config_value)
                         except:
-                            self.blexit.on_debug("theme config option {} is not an int".format(key, self.theme))
+                            msg = "theme config option {} is not an int"
+                            self.blexit.on_debug(msg.format(key, self.theme))
                             config_value = default_theme_detail.value
                     elif default_theme_detail.value_type == 'float':
                         try:
-                            default_theme_detail.config_value =float(config_value)
+                            default_theme_detail.config_value = float(config_value)
                         except:
-                            self.bl-exit.on_debug("theme config option {} is not a float".format(key, self.theme))
+                            msg = "theme config option {} is not a float"
+                            self.bl-exit.on_debug(msg.format(key, self.theme))
                             config_value = default_theme_detail.value
                 else:
                     if default_theme_detail.required:
